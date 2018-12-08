@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use app\models\Monstertest;
 
 $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;
