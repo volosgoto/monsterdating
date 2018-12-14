@@ -66,8 +66,10 @@ class MonsterController extends Controller
     {
         $model = new Monster();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->hashPassword;
+            $model->save();
+            $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [

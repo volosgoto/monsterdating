@@ -16,8 +16,13 @@ use yii\web\IdentityInterface;
  * @property string $password
  * @property string $authKey
  */
+
+
+
 class Monster extends \yii\db\ActiveRecord implements IdentityInterface
 {
+    public $hashPassword = false;
+
     /**
      * {@inheritdoc}
      */
@@ -82,6 +87,19 @@ class Monster extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function validatePassword($password)
     {
-        return ($this->password == $password) ? true : false;
+//        return ($this->password == $password) ? true : false;
+        return Yii::$app->security->validatePassword($password, $this->password);
     }
+
+    public function beforeSave($insert) {
+        if (parent::beforeSave($insert)) {
+            if ($this->hashPassword) {
+            $this->password = Yii::$app->security->generatePasswordHash($this->password, 5);
+            return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
 }
