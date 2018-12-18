@@ -16,11 +16,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'age')->textInput() ?>
 
-    <?= $form->field($model, 'gender')->dropDownList(['m' => 'Male', 'f' => 'Female'], ['prompt' => 'Please choose']) ?>
+    <?= $form->field($model, 'gender')->dropDownList(['m' => 'Male', 'f' => 'Female']) ?>
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true])->hint('4 character minimum') ?>
+    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true])->hint('4 character min') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

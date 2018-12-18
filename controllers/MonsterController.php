@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Monster;
-use app\models\MonsterSerch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,11 +35,11 @@ class MonsterController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new MonsterSerch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = new ActiveDataProvider([
+            'query' => Monster::find(),
+        ]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -67,9 +67,12 @@ class MonsterController extends Controller
         $model = new Monster();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->hashPassword;
+
+            $model->password = Yii::$app->security->generatePasswordHash($model->password, 5);
+
             $model->save();
-            $this->redirect(['view', 'id' => $model->id]);
+
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
