@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m181214_081731_monster_table
+ * Handles the creation of table `monster`.
  */
-class m181214_081731_monster_table extends Migration
+class m181218_080849_create_monster_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -28,21 +28,6 @@ class m181214_081731_monster_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('monstertest');
+        $this->dropTable('monster');
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m181214_081731_monster_table cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }
