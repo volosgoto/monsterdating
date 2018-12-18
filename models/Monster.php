@@ -38,7 +38,11 @@ class Monster extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             [['age'], 'integer'],
-            [['name', 'gender', 'username', 'password', 'authKey'], 'string', 'max' => 255],
+            [['username'], 'unique'],
+            [['password'], 'string', 'min' => 4],
+            [['gender'], 'in', 'range' => ['m', 'f']],
+
+            [['name', 'username', 'authKey'], 'string', 'max' => 255],
         ];
     }
 
@@ -49,7 +53,7 @@ class Monster extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Full Name',
             'age' => 'Age',
             'gender' => 'Gender',
             'username' => 'Username',

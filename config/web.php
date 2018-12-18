@@ -60,7 +60,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-
+                'register' => 'monster/create',
             ],
         ],
 
